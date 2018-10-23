@@ -1,10 +1,17 @@
 {
-	"name": "codemix/yii2-dockerized",
-	"description": "A template for docker based Yii 2 applications",
+	"name": "exbico/test",
+	"description": "Test task for exbico company",
 	"keywords": ["yii2", "framework", "docker", "application template"],
 	"type": "project",
-	"license": "MIT",
+	"license": "proprietary",
 	"minimum-stability": "stable",
+	"authors": [
+		{
+			"name": "Alexander Busygin",
+			"email": "pincher2012@yandex.ru",
+			"role": "Developer"
+		}
+	],
 	"require": {
 		"php": ">=5.4.0",
 		"yiisoft/yii2": "2.0.15.1",

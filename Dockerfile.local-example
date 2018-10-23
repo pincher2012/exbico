@@ -1,0 +1,5 @@
+FROM exbico:base-1.0
+
+RUN apk add --no-cache --virtual .build-deps php7-pear php7-dev gcc musl-dev make \
+    && pecl install xdebug \
+    && apk del .build-deps

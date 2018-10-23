@@ -1,19 +1,13 @@
 Yii 2 Dockerized
 ================
 
-A template for docker based Yii 2 applications.
+# Getting started
 
- * Ephemeral container, configured via environment variables
- * Application specific base image (Nginx + PHP-FPM)
- * Optional local configuration overrides for development/debugging (git-ignored)
- * Base scaffold code for login, signup and forgot-password actions
- * Flat configuration file structure
-
-> **Note:** The included example base image is now based on Alpine Linux and
-> uses [s6-overlay](https://github.com/just-containers/s6-overlay) to supervise
-> Nginx + PHP-FPM. You can of course change this to any setup you prefer.
-> You find the "old" setup based on Apache and mod_php in the "apache" branch.
-> Note though, that it's no longer maintained.
+1. `cp docker-compose-example.yml docker-compose.yml`;
+2. Setup environment variables;
+3. `chmod 777 runtime web/assets var/sessions`;
+4. `cd build && docker-compose build base`;
+5. `cd ../ && docker-compose up -d`
 
 # 1 Main Concepts
 
