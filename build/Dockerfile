@@ -25,7 +25,6 @@ RUN wget -O /tmp/s6-overlay-amd64.tar.gz \
     && rm /tmp/s6-overlay-amd64.tar.gz
 
 RUN apk add --no-cache \
-    # Required packages
     nginx \
     php7 \
     php7-ctype \
@@ -38,22 +37,13 @@ RUN apk add --no-cache \
     php7-posix \
     php7-session \
     php7-tokenizer \
-
-    # Optional extensions (modify as needed)
     php7-apcu \
     php7-opcache \
     php7-pdo_mysql \
-
-    # Ensure user/group www-data for php-fpm
     && adduser -u 82 -D -S -G www-data www-data \
-
-    # Create pid dir and send logs to stderr for Nginx
     && mkdir /run/nginx \
     && ln -sf /dev/stderr /var/log/nginx/error.log \
-    # Drop access logs as they only duplicate the host logs
     && ln -sf /dev/null /var/log/nginx/access.log \
-
-    # Create Fifo for logging as php-fpm doesn't like writing to stdout/stderr
     && mkfifo /tmp/yii-stdout && chmod 666 /tmp/yii-stdout
 
 

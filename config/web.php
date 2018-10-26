@@ -9,7 +9,6 @@ $config = [
     'basePath' => '/var/www/html',
     'bootstrap' => ['log'],
     'vendorPath' => '/var/www/vendor',
-    'catchAll' => self::env('MAINTENANCE', false) ? ['site/maintenance'] : null,
     'components' => [
         'cache' => self::env('DISABLE_CACHE', false) ?
             'yii\caching\DummyCache' :
@@ -25,9 +24,6 @@ $config = [
             'charset' => 'utf8',
             'tablePrefix' => '',
         ],
-        'errorHandler' => [
-            'errorAction' => 'site/error',
-        ],
         'log' => [
             'traceLevel' => self::env('YII_TRACELEVEL', 0),
             'targets' => [
@@ -36,17 +32,6 @@ $config = [
                     'url' => 'file:///tmp/yii-stdout',
                     'logVars' => [],
                 ],
-            ],
-        ],
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            'transport' => [
-                'class' => 'Swift_SmtpTransport',
-                'host' => self::env('SMTP_HOST'),
-                'username' => self::env('SMTP_USER'),
-                'password' => self::env('SMTP_PASSWORD'),
-                'port' => self::env('SMTP_PORT', 25),
-                'encryption' => self::env('SMTP_ENCRYPTION', null),
             ],
         ],
         'request' => [
@@ -62,33 +47,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
         ],
-        'user' => [
-            'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
-            'loginUrl' => ['user/login'],
-        ],
-    ],
-    'params' => [
-        'mail.from' => ['no-reply@example.com' => 'My Application'],
-        'mail.catchAll' => self::env('MAIL_CATCHALL', null),
-
-        'user.passwordResetTokenExpire' => 3600,
-        'user.emailConfirmationTokenExpire' => 43200, // 5 days
     ],
 ];
-
-if (YII_ENV_DEV) {
-    $config['bootstrap'][] = 'debug';
-    $config['modules']['debug'] = [
-        'class' => 'yii\debug\Module',
-        'allowedIPs' => ['*'],
-    ];
-
-    $config['bootstrap'][] = 'gii';
-    $config['modules']['gii'] = [
-        'class' => 'yii\gii\Module',
-        'allowedIPs' => ['*'],
-    ];
-}
 
 return $config;
