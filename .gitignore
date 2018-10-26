@@ -10,3 +10,4 @@ config/php/local.ini
 *.swp
 .vimrc
 
+/.php_cs.cache

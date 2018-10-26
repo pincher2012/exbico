@@ -1,7 +1,9 @@
 <?php
+
+declare(strict_types=1);
 use codemix\yii2confload\Config;
 
-require('/var/www/vendor/autoload.php');
+require '/var/www/vendor/autoload.php';
 
 // Init configuration and load Yii bootstrap file
 $config = Config::bootstrap('/var/www/html');

@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /* @var codemix\yii2confload\Config $this */
 $config = [
     'id' => 'basic',
@@ -13,9 +15,9 @@ $config = [
         'cache' => self::env('DISABLE_CACHE', false) ?
             'yii\caching\DummyCache' :
             [
-                'class' => 'yii\caching\ApcCache',
-                'useApcu' => true,
-            ],
+            'class' => 'yii\caching\ApcCache',
+            'useApcu' => true,
+        ],
         'db' => [
             'class' => 'yii\db\Connection',
             'dsn' => self::env('DB_DSN', 'mysql:host=db;dbname=web'),

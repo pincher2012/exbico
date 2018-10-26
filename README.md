@@ -3,11 +3,17 @@ Yii 2 Dockerized
 
 # Getting started
 
+## Build images
+
 1. `cp docker-compose-example.yml docker-compose.yml`;
 2. Setup environment variables;
 3. `chmod 777 runtime web/assets var/sessions`;
 4. `cd build && docker-compose build base`;
 5. `cd ../ && docker-compose up -d`
+
+## Fix codestyle
+
+`docker-compose exec web /var/www/vendor/bin/php-cs-fixer fix`
 
 # 1 Main Concepts
 

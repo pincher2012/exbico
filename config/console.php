@@ -1,7 +1,10 @@
 <?php
+
+declare(strict_types=1);
 /* @var codemix\yii2confload\Config $this */
 
 $web = $this->web();
+
 return [
     'id' => $web['id'],
     'aliases' => $web['aliases'],
@@ -16,7 +19,7 @@ return [
                 [
                     'class' => 'codemix\streamlog\Target',
                     'url' => 'php://stdout',
-                    'levels' => ['info','trace'],
+                    'levels' => ['info', 'trace'],
                     'categories' => ['app\\*'],
                     'logVars' => [],
                 ],
