@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 use codemix\yii2confload\Config;
 
 require '/var/www/vendor/autoload.php';

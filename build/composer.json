@@ -13,14 +13,15 @@
 		}
 	],
 	"require": {
-		"php": ">=7.2",
+		"php": ">=7.1",
 		"yiisoft/yii2": "2.0.15.1",
 		"yiisoft/yii2-bootstrap": "~2.0.0",
 		"codemix/yii2-configloader": "~0.9.0",
 		"codemix/yii2-streamlog": "~1.1.0"
 	},
 	"require-dev": {
-		"friendsofphp/php-cs-fixer": "^2.13"
+		"friendsofphp/php-cs-fixer": "^2.13",
+		"phpunit/phpunit": "^7.4"
 	},
 	"config": {
 		"process-timeout": 1800,
