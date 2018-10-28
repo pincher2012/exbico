@@ -10,14 +10,12 @@ namespace app\services;
 final class SeparatorService
 {
     /**
-     * Returns index of.
+     * Returns index of list divider.
      *
      * @param int   $number
      * @param int[] $list
      *
      * @return int
-     *
-     * @throws \Exception
      */
     public function separate(int $number, array $list): int
     {

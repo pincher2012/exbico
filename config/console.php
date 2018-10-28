@@ -32,5 +32,5 @@ return [
             ],
         ],
     ],
-    'params' => $web['params'],
+    'params' => $web['params'] ?? [],
 ];
