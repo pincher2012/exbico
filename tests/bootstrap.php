@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 define('YII_ENV', 'test');
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 require_once '/var/www/vendor/yiisoft/yii2/Yii.php';

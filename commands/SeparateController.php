@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace app\commands;
 
-use app\services\SeparatorService;
+use app\domain\Separator;
+use app\models\ListSeparationForm;
 use yii\console\Controller;
 use yii\console\ExitCode;
 
+/**
+ * Class SeparateController.
+ */
 class SeparateController extends Controller
 {
     /**
@@ -21,22 +25,23 @@ class SeparateController extends Controller
      */
     public function actionIndex($number, array $list): int
     {
-        $validatedNumber = filter_var($number, FILTER_VALIDATE_INT);
-        if ($validatedNumber === false) {
-            echo 'Invalid input' . PHP_EOL;
+        $params = [
+            'number' => $number,
+            'list' => $list,
+        ];
+
+        $form = new ListSeparationForm($params);
+        if (!$form->validate()) {
+            $errors = $form->getErrorSummary(true);
+            foreach ($errors as $error) {
+                $this->stdout($error.PHP_EOL);
+            }
 
             return ExitCode::UNSPECIFIED_ERROR;
         }
 
-
-        $validatedList = filter_var($list, FILTER_VALIDATE_INT, FILTER_REQUIRE_ARRAY);
-        if (in_array(false, $validatedList, true)) {
-            echo 'Invalid input' . PHP_EOL;
-
-            return ExitCode::UNSPECIFIED_ERROR;
-        }
-
-        echo (new SeparatorService())->separate($validatedNumber, $validatedList) . PHP_EOL;
+        $result = (new Separator())->separate($form->getDto());
+        $this->stdout($result.PHP_EOL);
 
         return ExitCode::OK;
     }

@@ -15,6 +15,10 @@ Yii 2 Dockerized
 
 `docker-compose exec web /var/www/vendor/bin/php-cs-fixer fix`
 
+## Run tests
+
+`docker-compose exec web php /var/www/vendor/bin/phpunit`
+
 # 1 Main Concepts
 
 ## 1.1 Base Image

@@ -2,11 +2,14 @@
 
 declare(strict_types=1);
 
-namespace app\services;
+namespace app\domain;
 
 use PHPUnit\Framework\TestCase;
 
-class SeparatorServiceTest extends TestCase
+/**
+ * Class SeparatorTest.
+ */
+class SeparatorTest extends TestCase
 {
     /**
      * @dataProvider providerSeparate
@@ -14,13 +17,12 @@ class SeparatorServiceTest extends TestCase
      * @param int   $expected
      * @param int   $number
      * @param array $list
-     *
-     * @throws \Exception
      */
     public function testSeparate(int $expected, int $number, array $list): void
     {
-        $service = new SeparatorService();
-        $result = $service->separate($number, $list);
+        $params = new SeparatorParams($number, $list);
+        $service = new Separator();
+        $result = $service->separate($params);
 
         self::assertEquals($expected, $result);
     }

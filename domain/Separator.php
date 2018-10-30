@@ -2,23 +2,25 @@
 
 declare(strict_types=1);
 
-namespace app\services;
+namespace app\domain;
 
 /**
  * Class SeparatorService.
  */
-final class SeparatorService
+final class Separator
 {
     /**
      * Returns index of list divider.
      *
-     * @param int   $number
-     * @param int[] $list
+     * @param SeparatorParams $params
      *
      * @return int
      */
-    public function separate(int $number, array $list): int
+    public function separate(SeparatorParams $params): int
     {
+        $list = $params->getList();
+        $number = $params->getNumber();
+
         if (count($list) < 2) {
             return -1;
         }
@@ -29,7 +31,7 @@ final class SeparatorService
 
         while ($i < $j) {
             do {
-                $i++;
+                ++$i;
                 if ($i === $lastIndex) {
                     return -1;
                 }
@@ -40,7 +42,7 @@ final class SeparatorService
             } while ($list[$i] !== $number);
 
             do {
-                $j--;
+                --$j;
                 if ($j === -1) {
                     return -1;
                 }
