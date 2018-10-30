@@ -39,6 +39,23 @@ $config = [
         'request' => [
             'cookieValidationKey' => self::env('COOKIE_VALIDATION_KEY', null, !YII_ENV_TEST),
             'trustedHosts' => explode(',', self::env('PROXY_HOST', '192.168.0.0/24')),
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
+        ],
+        'response' => [
+            'class' => 'yii\web\Response',
+            'on beforeSend' => function ($event) {
+                $response = $event->sender;
+                $data = ['success' => $response->isSuccessful];
+                if ($response->isSuccessful) {
+                    $data['data'] = $response->data;
+                } else {
+                    $data['error'] = $response->data;
+                }
+
+                $response->data = $data;
+            },
         ],
         'session' => [
             'name' => 'MYAPPSID',
@@ -48,13 +65,6 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-        ],
-        'i18n' => [
-            'translations' => [
-                '*' => [
-                    'class' => 'yii\i18n\PhpMessageSource'
-                ],
-            ],
         ],
     ],
     'params' => [],
