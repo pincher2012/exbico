@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace app\controllers;
 
+use app\auth\Authenticator;
 use app\domain\Separator;
 use app\models\ListSeparationForm;
+use yii\filters\auth\HttpBasicAuth;
 use yii\filters\ContentNegotiator;
 use yii\filters\VerbFilter;
 use yii\rest\Controller;
@@ -35,6 +37,11 @@ class ApiController extends Controller
                     'separate' => ['GET'],
                     'index' => ['GET'],
                 ],
+            ],
+            'authenticator' => [
+                'class' => HttpBasicAuth::class,
+                'except' => ['index'],
+                'auth' => [Authenticator::class, 'authenticate']
             ],
         ];
     }

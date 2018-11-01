@@ -1,7 +1,11 @@
 <?php
 
 declare(strict_types=1);
+
 /* @var codemix\yii2confload\Config $this */
+
+use app\models\User;
+
 $config = [
     'id' => 'basic',
     'aliases' => [
@@ -15,16 +19,19 @@ $config = [
         'cache' => self::env('DISABLE_CACHE', false) ?
             'yii\caching\DummyCache' :
             [
-            'class' => 'yii\caching\ApcCache',
-            'useApcu' => true,
-        ],
+                'class' => 'yii\caching\ApcCache',
+                'useApcu' => true,
+            ],
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => self::env('DB_DSN', 'mysql:host=db;dbname=web'),
+            'dsn' => self::env('DB_DSN', 'mysql:host=db;dbname=exbico'),
             'username' => self::env('DB_USER', 'web'),
             'password' => self::env('DB_PASSWORD', 'web'),
             'charset' => 'utf8',
             'tablePrefix' => '',
+            'enableSchemaCache' => true,
+            'schemaCacheDuration' => 0,
+            'schemaCache' => 'cache',
         ],
         'log' => [
             'traceLevel' => self::env('YII_TRACELEVEL', 0),
@@ -57,15 +64,15 @@ $config = [
                 $response->data = $data;
             },
         ],
-        'session' => [
-            'name' => 'MYAPPSID',
-            'savePath' => '@app/var/sessions',
-            'timeout' => 1440,
-        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
         ],
+        'user' => [
+            'identityClass' => User::class,
+            'enableSession' => false,
+            'loginUrl' => null,
+        ]
     ],
     'params' => [],
 ];

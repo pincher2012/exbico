@@ -4,6 +4,7 @@ config/php/local.ini
 /docker-compose.yml
 /vendor/
 /Dockerfile.local
+/volumes/
 
 .env
 *.bak
