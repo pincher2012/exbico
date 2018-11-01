@@ -6,7 +6,11 @@ namespace app\controllers;
 
 use app\auth\Authenticator;
 use app\domain\Separator;
+use app\models\SeparateCallLog;
 use app\models\ListSeparationForm;
+use app\repository\SeparateCallLogRepository;
+use DateTime;
+use Yii;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\ContentNegotiator;
 use yii\filters\VerbFilter;
@@ -77,7 +81,15 @@ class ApiController extends Controller
             throw new BadRequestHttpException(reset($errors));
         }
 
-        return (new Separator())
-            ->separate($form->getDto());
+        $paramsDto = $form->getDto();
+
+        $separator = new Separator();
+        $result = $separator->separate($paramsDto);
+
+        $repository = new SeparateCallLogRepository();
+        $user = Yii::$app->user->identity;
+        $repository->create($user, $paramsDto, $result);
+
+        return $result;
     }
 }

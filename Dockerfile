@@ -11,5 +11,5 @@ COPY ./config/php/production.ini /etc/php7/conf.d/90-production.ini
 COPY . /var/www/html
 
 # Create required directories listed in .dockerignore
-RUN mkdir -p runtime web/assets var/sessions \
-    && chown www-data:www-data runtime web/assets var/sessions
+RUN mkdir -p runtime web/assets \
+    && chown www-data:www-data runtime web/assets

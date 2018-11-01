@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace app\domain;
 
+use JsonSerializable;
+
 /**
  * Class SeparatorParams.
  */
-class SeparatorParams
+class SeparatorParams implements JsonSerializable
 {
     /**
      * @var int
@@ -45,5 +47,16 @@ class SeparatorParams
     public function getList(): array
     {
         return $this->list;
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'number' => $this->number,
+            'list' => $this->list,
+        ];
     }
 }
